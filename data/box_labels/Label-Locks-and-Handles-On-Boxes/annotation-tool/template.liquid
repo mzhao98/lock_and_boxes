@@ -1,0 +1,16 @@
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+<crowd-form>
+  <crowd-bounding-box
+    name="boundingBox"
+    src="{{ task.input.taskObject | grant_read_access }}"
+    header="Draw bounding boxes around the locks and door handles in the image. Each bounding box should contain a single item. A separate bounding box should be drawn for every lock and handle in the image. "
+    labels="{{ task.input.labels | to_json | escape }}"
+  >
+    <full-instructions header="Bounding box instructions">
+      <ol><li><strong>Inspect</strong> the image</li><li><strong>Determine</strong> if the specified label is/are visible in the picture.</li><li><strong>Outline</strong> each instance of the specified label in the image using the provided “Box” tool.</li></ol><ul><li>Boxes should fit tight around each object</li><li>Do not include parts of the object are overlapping or that cannot be seen, even though you think you can interpolate the whole shape.</li><li>Avoid including shadows.</li><li>If the target is off screen, draw the box up to the edge of the image.</li></ul><p><img src="https://d206arnongoaen.cloudfront.net/440c8e4a-762b-4652-8fca-3dd875d22ecf/src/images/bounding-box-good-example.png" style="max-width:100%"></p><h2><span style="color: rgb(0, 138, 0);">Good Example</span></h2><p><img src="https://d206arnongoaen.cloudfront.net/440c8e4a-762b-4652-8fca-3dd875d22ecf/src/images/bounding-box-bad-example.png" style="max-width:100%"></p><h2><span style="color: rgb(230, 0, 0);">Bad Example</span></h2>
+    </full-instructions>
+    <short-instructions>
+      <h3><span style="color: rgb(0, 138, 0);">Good example</span></h3><p>Boxes should be drawn tightly around each item. If items overlap, draw one box for each.</p><p><img src="https://github.com/mzhao98/lock_and_boxes/blob/master/goodshot.png?raw=true" style="max-width:100%" alt="goodshot.png"></p><p><br></p><h3><span style="color: rgb(230, 0, 0);">Bad example</span></h3><p>Include all parts of the item you can see. Don't include parts of the lock or handle you cannot see.<img src="https://github.com/mzhao98/lock_and_boxes/blob/master/badshot.png?raw=true" style="max-width:100%" alt="badshot.png"></p>
+    </short-instructions>
+  </crowd-bounding-box>
+</crowd-form>
